@@ -1,0 +1,82 @@
+﻿@model BankBros.Backend.Entity.Concrete.Customer
+@{
+    ViewBag.Title = "Deposit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:50px;">Para Yatır</h2>
+@if (Session["ErrMsg"].ToString() != "")
+{
+    <script>
+        alert("@Session["ErrMsg"]");
+    </script>
+
+    Session["ErrMsg"] = "";
+}
+
+<h3 style="text-align:center">@Model.CustomerDetails.FirstName @Model.CustomerDetails.LastName </h3>
+
+@if (Model.Accounts.Count == 0)
+{
+    <div class="container">
+        <div class="row">
+            <h3>Açık Hesabınız Bulunmamaktadır...</h3>
+            <button class="btn-outline-success" onclick="location.href='@Url.Action("newAccount", "Account")'">Hesap Aç</button>
+        </div>
+    </div>
+}
+else
+{
+
+    int i = 1;
+    <table class="table form-group col-md-12">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hesap Numarası</th>
+                <th scope="col">Bakiye</th>
+                <th scope="col">Durumu</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.Accounts)
+            {
+
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@x.AccountNumber</td>
+                    <td>@x.Balance</td>
+                    @if (@x.Status == true)
+                    {
+                        <td>Aktif</td>
+                    }
+                    else
+                    {
+                        <td>Pasif</td>
+                    }
+
+
+                    <td>
+                        <form action="@Url.Action("Deposit", "InHome" ,new { AccountNumber = x.AccountNumber } )" method="post" enctype="multipart/form-data">
+
+                            <input type="number" name="amount" min="1" max="5000000" step="0.1" oninput="validity.valid||(value='');" required pattern="[0-9]+">
+                            <button class="btn btn-outline-warning" type="submit">
+                                Para Yatır
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+
+
+}

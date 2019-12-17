@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Virement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["ErrMsg"].ToString() != "")
+{
+    <script>
+        alert("@Session["ErrMsg"]");
+    </script>
+
+    Session["ErrMsg"] = "";
+}
+<h2 style="text-align:center; margin-top:50px;">Kendi Hesabına Para Transferi</h2>
+
+<form action="@Url.Action("Virement", "InHome")" method="post" enctype="multipart/form-data" class="login100-form validate-form">
+
+    <div class="wrap-input100 rs1 validate-input" data-validate="Gönderen Hesap Numarası Boş Geçilemez" style="margin-top:5px;">
+        <input class="input100" type="number" min="1" max="1100" oninput="validity.valid||(value='');"  requiredname="senderAccountNumber" pattern="[0-9]{4}">
+        <span class="label-input100">Gönderen Hesap Numarası</span>
+
+    </div>
+
+    <div class="wrap-input100 rs2 validate-input" data-validate="Alıcı Hesap Numarası Boş Geçilemez" style="margin-top:5px;">
+        <input class="input100" type="number" min="1" max="1100" oninput="validity.valid||(value='');" required name="targetAccount" pattern="[0-9]{4}">
+        <span class="label-input100">Alıcı Hesap Numarası</span>
+    </div>
+    <div class="wrap-input100 rs1 validate-input" data-validate="Miktar Boş Geçilemez" style="margin-top:5px;">
+        <input class="input100" type="number" min="1" step="0.1" max="500000" oninput="validity.valid||(value='');" required name="amount" pattern="[0-9]+">
+        <span class="label-input100">Miktar</span>
+    </div>
+
+    <div class="container-login100-form-btn" style="margin-top:5px;">
+        <button class="login100-form-btn">
+            Gönder
+        </button>
+    </div>
+
+
+</form>

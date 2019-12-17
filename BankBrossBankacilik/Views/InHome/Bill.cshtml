@@ -1,0 +1,61 @@
+﻿@model List<BankBros.Backend.Entity.Concrete.Bill>
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 style="text-align:center; margin-top:50px;">Fatura Ödeme</h2>
+@if (Session["ErrMsg"].ToString() != "")
+{
+    <script>
+        alert("@Session["ErrMsg"]");
+    </script>
+
+    Session["ErrMsg"] = "";
+}
+
+
+
+@{int i = 1; }
+<table class="table form-group col-md-12">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fatura Adı</th>
+            <th scope="col">Fatura Bedeli</th>
+            <th scope="col">Fatura Tarihi</th>
+            <th scope="col">Gönderen Hesap Numarası</th>
+            <th scope="col"></th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+
+            <tr>
+                <th scope="row">@i</th>
+                <td>@x.Name</td>
+                <td>@x.Amount</td>
+                <td>@x.CreatedAt</td>
+
+
+                <td>
+                    <form action="@Url.Action("Bill", "InHome",x) " method="post" enctype="multipart/form-data">
+                        <input type="number" name="senderAccountNumber" min="1" maxlength="4" oninput="validity.valid||(value='');" required pattern="[0-9]+">
+                        <button class="btn btn-outline-danger">Öde</button>
+                    </form>
+                </td>
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+
+<button class="btn-outline-success" onclick="location.href='@Url.Action("AddBill", "InHome")'">Fatura Ekle</button>

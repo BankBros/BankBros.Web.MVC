@@ -1,0 +1,170 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BankBross Bankacılık Hizmetleri</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/LoginV20/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/LoginV20/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+    
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-b-160 p-t-50">
+                <form action="@Url.Action("Register", "Home")" method="post" enctype="multipart/form-data" class="login100-form validate-form">
+                    <span class="login100-form-title p-b-43">
+                        Bireysel Müşteri Kayıt Ekranı
+                    </span>
+                    @if (Session["ErrMsg"].ToString() != "")
+                    {
+                        <script>
+                         alert("@Session["ErrMsg"]");
+                        </script>
+
+                        Session["ErrMsg"] = "";
+                    }
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Tc Kimlik Numarası Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="text" name="tc"
+                               onkeypress="if(this.value.length>=11) { return false}"
+                               onkeydown="return ( event.ctrlKey || event.altKey
+                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9)
+                    || (event.keyCode>34 && event.keyCode<40)
+                    || (event.keyCode==46) )"
+
+                               pattern="[0-9]{11}">
+                        <span class="label-input100">TC Kimlik No</span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Şifre Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="password" name="pw"
+                               onkeypress="if(this.value.length>=6) { return false}"
+                               onkeydown="return ( event.ctrlKey || event.altKey
+                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9)
+                    || (event.keyCode>34 && event.keyCode<40)
+                    || (event.keyCode==46) )"
+
+                               oninput="if(this.value.length>=6) { this.value = this.value.slice(0,6); }"
+                               pattern="[0-9]{6}">
+                        <span class="label-input100">Şifre</span>
+                    </div>
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Ad Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="text" name="ad"
+                               onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }"
+                               pattern="{3,50}">
+                        <span class="label-input100">Ad</span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Soyad Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="text" name="soyad"
+                               onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }"
+                               pattern="{3,50}">
+                        <span class="label-input100">Soyad</span>
+                    </div>
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Email Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="email" name="email">
+                        <span class="label-input100">Email</span>
+                    </div>
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Telefon Numarası Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="number" name="tel" onkeypress="if(this.value.length>=10) { return false}" oninput="validity.valid||(value='');" pattern="[0-9]{10}">
+                        <span class="label-input100">Telefon Numarası</span>
+                    </div>
+
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Gizli Soru Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="text" onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }" name="gizliSoru"
+                               pattern="{2,50}">
+                        <span class="label-input100">Gizli Soru</span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Gizli Soru Cevap Geçilemez" style="margin-top:5px;">
+
+                        <input class="input100" type="text" name="gizliCevap" onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }" pattern="{1,50}">
+                        <span class="label-input100">Gizli Soru Cevap</span>
+                    </div>
+
+                    <div class="wrap-input100 rs1 validate-input" data-validate="İl Boş Geçilemez" style="margin-top:5px;">
+                        <input class="input100" type="text" name="il"
+                               onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }"
+                               pattern="{2,50}">
+                        <span class="label-input100">İl</span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2 validate-input" data-validate="İlçe Boş Geçilemez" style="margin-top:5px;">
+
+                        <input class="input100" type="text" name="ilce"
+                               onkeypress="if(this.value.length >= 20 || (event.charCode >= 48 && event.charCode <= 57)) { return false }"
+                               pattern="{2,50}">
+                        <span class="label-input100">İlçe</span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" style="border-bottom-left-radius: 12px;
+                                border-bottom-right-radius: 12px; margin-top:5px;">
+                            Kayıt Ol
+                        </button>
+                    </div>
+
+                </form>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" style="border-bottom-left-radius: 12px;
+                                border-bottom-right-radius: 12px; margin-top:5px;" onclick="location.href='@Url.Action("Index", "Home")'">
+                        Anasayfa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/LoginV20/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/LoginV20/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/LoginV20/js/main.js"></script>
+
+</body>
+</html>
