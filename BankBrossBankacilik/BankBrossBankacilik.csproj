@@ -153,6 +153,7 @@
     <Compile Include="Models\CustomerDetailUpdateDto.cs" />
     <Compile Include="Models\DepositDto.cs" />
     <Compile Include="Models\DrawDto.cs" />
+    <Compile Include="Models\ErrorViewer.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\PayBillDto.cs" />
     <Compile Include="Models\Register.cs" />

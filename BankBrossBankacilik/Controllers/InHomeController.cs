@@ -35,13 +35,16 @@ namespace BankBrossBankacilik.Controllers
                 if (result1 != null)
                 {
 
-                    Session["ErrMsg"] = "Fatura Ekleme Basarili";
+                    
                     return RedirectToAction("Bill", "InHome");
 
                 }
                 else
                 {
-                    Session["ErrMsg"] = "Fatura eklenirken bir sorun olustu";
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Bill", "InHome");
 
                 }
@@ -49,7 +52,10 @@ namespace BankBrossBankacilik.Controllers
             catch (Exception e)
             {
 
-                Session["ErrMsg"] = "Fatura eklenirken bir sorun olustu  :"+e.Message;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Bill", "InHome");
             }
 
@@ -76,13 +82,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Login", "Home");
 
                 }
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e.Message;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Login", "Home");
             }
 
@@ -109,13 +122,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Account", "InHome");
 
                 }
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e.Message;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
             }
 
@@ -139,13 +159,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Account", "InHome");
                 
                 }
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
             }
            
@@ -155,7 +182,7 @@ namespace BankBrossBankacilik.Controllers
         {
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 string token = Session["Token"].ToString();
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                 if (customer != null)
@@ -165,13 +192,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Account", "InHome");
                 }
                
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
                 
             }
@@ -183,7 +217,7 @@ namespace BankBrossBankacilik.Controllers
 
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 string token = Session["Token"].ToString();
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                 if (customer != null)
@@ -193,13 +227,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Account", "InHome");
                 }
 
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
 
             }
@@ -211,7 +252,7 @@ namespace BankBrossBankacilik.Controllers
     {
         try
         {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 string token = Session["Token"].ToString();
             var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
             if (customer != null)
@@ -221,13 +262,20 @@ namespace BankBrossBankacilik.Controllers
             }
             else
             {
-                return RedirectToAction("Account", "InHome");
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
+                    return RedirectToAction("Account", "InHome");
             }
 
         }
         catch (Exception e)
         {
-                Session["ErrMsg"] = e;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
 
         }
@@ -238,7 +286,7 @@ namespace BankBrossBankacilik.Controllers
         {
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 string token = Session["Token"].ToString();
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                 if (customer != null)
@@ -248,13 +296,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     return RedirectToAction("Account", "InHome");
                 }
 
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = e;
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 return RedirectToAction("Account", "InHome");
 
             }
@@ -267,7 +322,7 @@ namespace BankBrossBankacilik.Controllers
             string token = Session["Token"].ToString();
             try
             {
-                Session["ErrMsg"] = "";
+                
                 DepositDto deposit = new DepositDto();
                 deposit.AccountNumber = AccountNumber;
                 deposit.Amount = amount;
@@ -277,15 +332,19 @@ namespace BankBrossBankacilik.Controllers
                 {
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                     Session["customer"] = customer;
-                    Session["ErrMsg"] = AccountNumber.ToString()+"Numarali Hesaba :"+amount.ToString()+ " ₺ Miktarinda Para Yatirildi";
+                    
                   
                     return RedirectToAction("Account", "InHome", customer);
 
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu";
+                    
                     return RedirectToAction("Deposit", "InHome", customer);
                     
 
@@ -293,9 +352,12 @@ namespace BankBrossBankacilik.Controllers
             }
             catch (Exception e)
             {
-
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu :(" + e.Message + ")";
+               
                 return RedirectToAction("Deposit", "InHome", customer);
             }
 
@@ -306,7 +368,7 @@ namespace BankBrossBankacilik.Controllers
             string token = Session["Token"].ToString();
             try
             {
-                Session["ErrMsg"] = "";
+                
                 DrawDto draw = new DrawDto();
                 draw.AccountNumber = AccountNumber;
                 draw.Amount = amount;
@@ -316,25 +378,33 @@ namespace BankBrossBankacilik.Controllers
                 {
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                     Session["customer"] = customer;
-                    Session["ErrMsg"] = AccountNumber.ToString() + "Numarali Hesaptan :" + amount.ToString() + " ₺ Miktarinda Para Cekildi";
+                    
 
                     return RedirectToAction("Account", "InHome", customer);
 
                 }
                 else
                 {
+                   
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu";
-                    return RedirectToAction("Draw", "InHome", customer);
+                    return RedirectToAction("Account", "InHome", customer);
 
                 }
             }
             catch (Exception e)
             {
 
+               
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu (" + e.Message + ")";
-                return RedirectToAction("Draw", "InHome", customer);
+                return RedirectToAction("Account", "InHome", customer);
             }
         }
 
@@ -344,7 +414,7 @@ namespace BankBrossBankacilik.Controllers
             string token = Session["Token"].ToString();
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 Customer obj = Session["customer"] as Customer;
                 if (obj == null)
                 {
@@ -364,23 +434,30 @@ namespace BankBrossBankacilik.Controllers
                 {
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                     Session["customer"] = customer;
-                    Session["ErrMsg"] = senderAccountNumber.ToString() + "Numarali Hesaptan :" + amount.ToString() + " ₺ Miktarinda Para " + targetCustomer.ToString() +"Numarali Kisinin"+targetAccount.ToString()+"Numarali Hesabina Havale Edildi";
+                   
 
                     return RedirectToAction("Account", "InHome", customer);
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu";
-                    return RedirectToAction("Transfer", "InHome", customer);
+                   
+                    return RedirectToAction("Account", "InHome", customer);
                 }
             }
             catch (Exception e)
             {
-
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu (" + e.Message + ")";
-                return RedirectToAction("Transfer", "InHome", customer);
+               
+                return RedirectToAction("Account", "InHome", customer);
             }
            
 
@@ -393,7 +470,7 @@ namespace BankBrossBankacilik.Controllers
             string token = Session["Token"].ToString();
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 Customer obj = Session["customer"] as Customer;
                 if (obj == null)
                 {
@@ -414,23 +491,29 @@ namespace BankBrossBankacilik.Controllers
                 {
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
                     Session["customer"] = customer;
-                    Session["ErrMsg"] = senderAccountNumber.ToString() + "Numarali Hesaptan :" + amount.ToString() + "  ₺  Miktarinda Para " + targetAccount.ToString() + "Numarali Hesabiniza Virman Edildi";
+                    
 
                     return RedirectToAction("Account", "InHome", customer);
                 }
                 else
                 {
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
                     var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu";
-                    return RedirectToAction("Virement", "InHome", customer);
+                    return RedirectToAction("Account", "InHome", customer);
                 }
             }
             catch (Exception e)
             {
-
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
                 var customer = await Task.Run(() => ApiHelper<Customer>.Get("/api/Customer", token));
-                Session["ErrMsg"] = e.Message;
-                return RedirectToAction("Virement", "InHome", customer);
+                
+                return RedirectToAction("Account", "InHome", customer);
             }
 
 
@@ -442,7 +525,7 @@ namespace BankBrossBankacilik.Controllers
         {
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 Customer obj = Session["customer"] as Customer;
                 if (obj == null)
                 {
@@ -466,14 +549,20 @@ namespace BankBrossBankacilik.Controllers
                 }
                 else
                 {
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu";
-                    return RedirectToAction("Login", "Home");
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
+                    return RedirectToAction("Account", "Home");
                 }
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu (" + e.Message + ")";
-                return RedirectToAction("Login", "Home");
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
+                return RedirectToAction("Account", "Home");
             }
 
 
@@ -484,7 +573,7 @@ namespace BankBrossBankacilik.Controllers
         {
             try
             {
-                Session["ErrMsg"] = "";
+                //Session["ErrMsg"] = "";
                 Customer obj = Session["customer"] as Customer;
                 if (obj == null)
                 {
@@ -508,21 +597,27 @@ namespace BankBrossBankacilik.Controllers
 
                 if (result != null)
                 {
-                    Session["ErrMsg"] = result;
+                    
                     return RedirectToAction("Credit", "InHome");
 
                 }
                 else
                 {
-                    Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu ";
-                    return RedirectToAction("Credit", "InHome");
+                    if (!ApiHelper<string>.ErrView.IsViewed)
+                    {
+                        Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                    }
+                    return RedirectToAction("Account", "InHome");
 
                 }
             }
             catch (Exception e)
             {
-                Session["ErrMsg"] = "Istek Islenirken Bir Sorun Olustu (" + e.Message + ")";
-                return RedirectToAction("Credit", "InHome");
+                if (!ApiHelper<string>.ErrView.IsViewed)
+                {
+                    Session["ErrMsg"] = ApiHelper<string>.ErrView;
+                }
+                return RedirectToAction("Account", "InHome");
             }
 
         }

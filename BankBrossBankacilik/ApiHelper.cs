@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankBrossBankacilik.Models;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -10,6 +11,7 @@ namespace Anonymous.FormsCrossCutting.Helpers
     public static class ApiHelper<T>
     {
         private static string baseURL = "https://bankbroscore.azurewebsites.net";
+        public static ErrorViewer ErrView = new ErrorViewer(); 
         public static async Task<T> Get(string pathname, string token = "")
         {
             using (var client = new HttpClient())
@@ -34,6 +36,10 @@ namespace Anonymous.FormsCrossCutting.Helpers
                 }
                 else
                 {
+                    var json = await response.Content.ReadAsStringAsync();
+                    JavaScriptSerializer serializer1 = new JavaScriptSerializer();
+                    ErrView.ErrMsg = serializer1.Deserialize<string>(json);
+                    ErrView.IsViewed = false;
                     // deal with error or here ...
                     return default(T);
                 }
@@ -65,6 +71,10 @@ namespace Anonymous.FormsCrossCutting.Helpers
                 }
                 else
                 {
+                    var json = await response.Content.ReadAsStringAsync();
+                    JavaScriptSerializer serializer1 = new JavaScriptSerializer();
+                    ErrView.ErrMsg = serializer1.Deserialize<string>(json);
+                    ErrView.IsViewed = false;
                     // deal with error or here ...
                     return default(T);
                 }
@@ -96,6 +106,10 @@ namespace Anonymous.FormsCrossCutting.Helpers
                 }
                 else
                 {
+                    var json = await response.Content.ReadAsStringAsync();
+                    JavaScriptSerializer serializer1 = new JavaScriptSerializer();
+                    ErrView.ErrMsg = serializer1.Deserialize<string>(json);
+                    ErrView.IsViewed = false;
                     // deal with error or here ...
                     return default(T);
                 }
@@ -127,6 +141,10 @@ namespace Anonymous.FormsCrossCutting.Helpers
                 }
                 else
                 {
+                    var json = await response.Content.ReadAsStringAsync();
+                    JavaScriptSerializer serializer1 = new JavaScriptSerializer();
+                    ErrView.ErrMsg = serializer1.Deserialize<string>(json);
+                    ErrView.IsViewed = false;
                     // deal with error or here ...
                     return default(T);
                 }

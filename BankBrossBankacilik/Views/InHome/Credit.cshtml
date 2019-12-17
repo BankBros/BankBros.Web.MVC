@@ -6,114 +6,109 @@
 
 
 <h2 style="text-align:center; margin-top:50px;">Krediler</h2>
-@if (Session["ErrMsg"].ToString() != "")
-{
-    <script>
-        alert("@Session["ErrMsg"]");
-    </script>
-    Session["ErrMsg"] = "";
-}
+@{
+
+   
 
 
+    <form class="border border-success" title="Kredi İstek Formu" style="margin-top:25px;" action="@Url.Action("Credit", "InHome")" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="amountHelp">Kredi Miktarı</label>
+            <input type="number" min="1" max="500000" oninput="validity.valid||(value='');" step="0.1" name="amount" pattern="[0-9]+" class="form-control" id="amountHelp" aria-describedby="emailHelp">
+            <small id="amountHelp" class="form-text text-muted">Ne kadar kredi istediğinizi girebilirsiniz.</small>
+        </div>
 
-<form class="border border-success" title="Kredi İstek Formu" style="margin-top:25px;" action="@Url.Action("Credit", "InHome")" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="amountHelp">Kredi Miktarı</label>
-        <input type="number" min="1" max="500000" oninput="validity.valid||(value='');" step="0.1" name="amount" pattern="[0-9]+" class="form-control" id="amountHelp" aria-describedby="emailHelp" >
-        <small id="amountHelp" class="form-text text-muted">Ne kadar kredi istediğinizi girebilirsiniz.</small>
-    </div>
+        <div class="form-group">
+            <label for="age">Yaş</label>
+            <input type="number" min="18" max="100" oninput="validity.valid||(value='');" name="age" pattern="[0-9]+" class="form-control" id="age" aria-describedby="ageHelp" required placeholder="Yaşınızı Girin">
+            <small id="ageHelp" class="form-text text-muted">Kaç yaşında olduğunuzu belirtiniz.</small>
+        </div>
+        <div class="form-group">
+            <label for="usedKredi">KullandığınızKredi Sayısı</label>
+            <input type="number" min="1" max="100" oninput="validity.valid||(value='');" name="usedKredi" pattern="[0-9]+" class="form-control" id="usedKredi" aria-describedby="usedKrediHelp">
+            <small id="usedKrediHelp" class="form-text text-muted">Şuan Kaç Adet Kredi Kullanıyorsunuz Belirtiniz.</small>
+        </div>
 
-    <div class="form-group">
-        <label for="age">Yaş</label>
-        <input type="number" min="18" max="100" oninput="validity.valid||(value='');" name="age" pattern="[0-9]+" class="form-control" id="age" aria-describedby="ageHelp" required placeholder="Yaşınızı Girin">
-        <small id="ageHelp" class="form-text text-muted">Kaç yaşında olduğunuzu belirtiniz.</small>
-    </div>
-    <div class="form-group">
-        <label for="usedKredi">KullandığınızKredi Sayısı</label>
-        <input type="number" min="1" max="100" oninput="validity.valid||(value='');" name="usedKredi" pattern="[0-9]+" class="form-control" id="usedKredi" aria-describedby="usedKrediHelp" >
-        <small id="usedKrediHelp" class="form-text text-muted">Şuan Kaç Adet Kredi Kullanıyorsunuz Belirtiniz.</small>
-    </div>
-
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Ev Durumu</label>
-        <select class="form-control" id="exampleFormControlSelect1" name="hashouse">
-            <option value="true">Evim Var</option>
-            <option value="false">Kiradayım</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect3">Telefon Durumu</label>
-        <select class="form-control" id="exampleFormControlSelect3" name="hasphone">
-            <option value="true">Telefonum Var</option>
-            <option value="false">Telefonum Yok</option>
-        </select>
-    </div>
-    <div class="container-login100-form-btn" style="margin-top:5px;">
-        <button class="login100-form-btn">
-            Kredi İsteği Gönder
-        </button>
-    </div>
-
-
-</form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Ev Durumu</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="hashouse">
+                <option value="true">Evim Var</option>
+                <option value="false">Kiradayım</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect3">Telefon Durumu</label>
+            <select class="form-control" id="exampleFormControlSelect3" name="hasphone">
+                <option value="true">Telefonum Var</option>
+                <option value="false">Telefonum Yok</option>
+            </select>
+        </div>
+        <div class="container-login100-form-btn" style="margin-top:5px;">
+            <button class="login100-form-btn">
+                Kredi İsteği Gönder
+            </button>
+        </div>
 
 
-@{int i = 1; }
-<table class="table form-group col-md-12">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Kredi Miktarı</th>
-            <th scope="col">Yaş</th>
-            <th scope="col">Ev</th>
-            <th scope="col">Mevcut Kredi</th>
-            <th scope="col">Telefon</th>
-            <th scope="col">Sonuç</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var x in Model)
-        {
+    </form>
 
+
+    @{int i = 1; }
+    <table class="table form-group col-md-12">
+        <thead class="thead-light">
             <tr>
-                <th scope="row">@i</th>
-                <td>@x.Amount</td>
-                <td>@x.Age</td>
-                <td>
-                    @{if (@x.HasHouse)
-                        {<p>Evim Var</p>}
-                        else
-                        {<p>Kiradayım</p> }
-                    }
-                </td>
-                <td>
-                    @x.UsedCredits
-                </td>
-                <td>
-                    @{if (@x.HasPhone)
-                        {<p>Telefonum Var</p>}
-                        else
-                        {<p>Telefonum Yok</p> }
-                    }
-                </td>
-                <td>
-                    @{if (@x.Result)
-                        {<p style="color: #FFFFFF;
+                <th scope="col">#</th>
+                <th scope="col">Kredi Miktarı</th>
+                <th scope="col">Yaş</th>
+                <th scope="col">Ev</th>
+                <th scope="col">Mevcut Kredi</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">Sonuç</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@x.Amount</td>
+                    <td>@x.Age</td>
+                    <td>
+                        @{if (@x.HasHouse)
+                            {<p>Evim Var</p>}
+                            else
+                            {<p>Kiradayım</p> }
+                        }
+                    </td>
+                    <td>
+                        @x.UsedCredits
+                    </td>
+                    <td>
+                        @{if (@x.HasPhone)
+                            {<p>Telefonum Var</p>}
+                            else
+                            {<p>Telefonum Yok</p> }
+                        }
+                    </td>
+                    <td>
+                        @{if (@x.Result)
+                            {<p style="color: #FFFFFF;
 background: #232323;
 text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;">Kabul Edildi</p>}
-                        else
-                        {<p style="color: #FFFFFF;
+                            else
+                            {<p style="color: #FFFFFF;
 background: #333333;
 text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;">Reddedildi</p> }
-                    }
-                </td>
+                        }
+                    </td>
 
 
-            </tr>
-            i++;
-        }
-    </tbody>
-</table>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
 
 
 

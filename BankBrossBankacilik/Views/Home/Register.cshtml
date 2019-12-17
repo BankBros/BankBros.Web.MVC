@@ -1,4 +1,4 @@
-﻿
+﻿@using BankBrossBankacilik.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +29,7 @@
     <!--===============================================================================================-->
 </head>
 <body>
-    
+
 
     <div class="limiter">
         <div class="container-login100">
@@ -38,13 +38,16 @@
                     <span class="login100-form-title p-b-43">
                         Bireysel Müşteri Kayıt Ekranı
                     </span>
-                    @if (Session["ErrMsg"].ToString() != "")
-                    {
-                        <script>
-                         alert("@Session["ErrMsg"]");
-                        </script>
-
-                        Session["ErrMsg"] = "";
+                    @{
+                       
+                        ErrorViewer err = Session["ErrMsg"] as ErrorViewer;
+                        if (!err.IsViewed)
+                        {
+                            <script>
+                            alert("@err.ErrMsg");
+                            </script>
+                            err.IsViewed = true;
+                        }
                     }
                     <div class="wrap-input100 rs1 validate-input" data-validate="Tc Kimlik Numarası Boş Geçilemez" style="margin-top:5px;">
                         <input class="input100" type="text" name="tc"

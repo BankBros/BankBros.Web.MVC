@@ -1,79 +1,73 @@
 ﻿@model BankBros.Backend.Entity.Concrete.Customer
+
 @{
     ViewBag.Title = "Account";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 style="text-align:center; margin-top:50px;">Hesap İşlemleri</h2>
-@if (Session["ErrMsg"].ToString() != "")
-{
-    <script>
-        alert("@Session["ErrMsg"]");
-    </script>
 
-    Session["ErrMsg"] = "";
-}
-<h3 style="text-align:center">@Model.CustomerDetails.FirstName @Model.CustomerDetails.LastName </h3>
+    <h3 style="text-align:center">@Model.CustomerDetails.FirstName @Model.CustomerDetails.LastName </h3>
 
-@if (Model.Accounts.Count == 0)
-{
-    <div class="container">
-        <div class="row">
-            <h3>Açık Hesabınız Bulunmamaktadır...</h3>
-            <button class="btn-outline-success" onclick="location.href='@Url.Action("newAccount", "Account")'">Hesap Aç</button>
+    @if (Model.Accounts.Count == 0)
+    {
+        <div class="container">
+            <div class="row">
+                <h3>Açık Hesabınız Bulunmamaktadır...</h3>
+                <button class="btn-outline-success" onclick="location.href='@Url.Action("newAccount", "Account")'">Hesap Aç</button>
+            </div>
         </div>
-    </div>
-}
-else
-{
+    }
+    else
+    {
 
-    int i = 1;
-    <table class="table form-group col-md-12">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Hesap Numarası</th>
-                <th scope="col">Bakiye</th>
-                <th scope="col">Durumu</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var x in Model.Accounts)
-            {
-
+        int i = 1;
+        <table class="table form-group col-md-12">
+            <thead class="thead-light">
                 <tr>
-                    <th scope="row">@i</th>
-                    <td>@x.AccountNumber</td>
-                    <td>@x.Balance</td>
-                    @if (@x.Status == true)
-                    {
-                        <td>Aktif</td>
-                    }
-                    else
-                    {
-                        <td>Pasif</td>
-                    }
+                    <th scope="col">#</th>
+                    <th scope="col">Hesap Numarası</th>
+                    <th scope="col">Bakiye</th>
+                    <th scope="col">Durumu</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
 
-                    @if (x.Balance == 0)
-                    {
-                        <td> <button class="btn btn-outline-warning" onclick="location.href='@Url.Action("deleteAccount", "Account",new {AccountNumber=x.AccountNumber})'">Sil</button></td>
-                    }
-                    else
-                    {
-                        <td> <button class="btn btn-outline-danger" onclick="location.href='@Url.Action("Draw", "InHome")'">Silmek İçin Bakiye Sıfırlayın</button></td>
-                    }
 
                 </tr>
-                i++;
-            }
-        </tbody>
-    </table>
-    <button class="btn-outline-success" onclick="location.href='@Url.Action("newAccount", "Account")'">Hesap Ekle</button>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.Accounts)
+                {
+
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@x.AccountNumber</td>
+                        <td>@x.Balance</td>
+                        @if (@x.Status == true)
+                        {
+                            <td>Aktif</td>
+                        }
+                        else
+                        {
+                            <td>Pasif</td>
+                        }
+
+                        @if (x.Balance == 0)
+                        {
+                            <td> <button class="btn btn-outline-warning" onclick="location.href='@Url.Action("deleteAccount", "Account",new {AccountNumber=x.AccountNumber})'">Sil</button></td>
+                        }
+                        else
+                        {
+                            <td> <button class="btn btn-outline-danger" onclick="location.href='@Url.Action("Draw", "InHome")'">Silmek İçin Bakiye Sıfırlayın</button></td>
+                        }
+
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+        <button class="btn-outline-success" onclick="location.href='@Url.Action("newAccount", "Account")'">Hesap Ekle</button>
 
 
-}
+    }
